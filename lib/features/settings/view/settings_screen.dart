@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../core/theme/health_metric.dart';
 import '../../../core/utils/validators.dart';
 import '../../../core/widgets/adaptive.dart';
+import '../../../core/widgets/wide_segments.dart';
 import '../../records/viewmodel/records_view_model.dart';
 import '../viewmodel/settings_view_model.dart';
 
@@ -51,16 +52,14 @@ class SettingsScreen extends StatelessWidget {
         const _Heading('Appearance'),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: SegmentedButton<ThemeMode>(
-            showSelectedIcon: false,
+          child: WideSegments<ThemeMode>(
             segments: const [
               ButtonSegment(value: ThemeMode.system, icon: Icon(Icons.brightness_auto), label: Text('System')),
               ButtonSegment(value: ThemeMode.light, icon: Icon(Icons.light_mode), label: Text('Light')),
               ButtonSegment(value: ThemeMode.dark, icon: Icon(Icons.dark_mode), label: Text('Dark')),
             ],
-            selected: {vm.themeMode},
-            onSelectionChanged: (s) =>
-                tryAction(ScaffoldMessenger.of(context), () => vm.setThemeMode(s.single)),
+            selected: vm.themeMode,
+            onChanged: (mode) => tryAction(ScaffoldMessenger.of(context), () => vm.setThemeMode(mode)),
           ),
         ),
         const _Heading('Data'),

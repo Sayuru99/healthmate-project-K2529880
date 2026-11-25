@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../core/theme/health_metric.dart';
 import '../../../core/utils/dates.dart';
 import '../../../core/widgets/message_view.dart';
+import '../../../core/widgets/wide_segments.dart';
 import '../../settings/viewmodel/settings_view_model.dart';
 import '../viewmodel/trends_view_model.dart';
 import 'bar_chart.dart';
@@ -23,26 +24,22 @@ class TrendsScreen extends StatelessWidget {
           : vm.loading
               ? const Center(child: CircularProgressIndicator.adaptive())
               : ListView(padding: const EdgeInsets.fromLTRB(16, 0, 16, 24), children: [
-                  SegmentedButton<HealthMetric>(
-                    showSelectedIcon: false,
+                  WideSegments<HealthMetric>(
                     segments: [
                       for (final m in HealthMetric.values)
                         ButtonSegment(
                             value: m, icon: Icon(m.icon, color: m.color(context)), label: Text(m.label)),
                     ],
-                    selected: {vm.metric},
-                    onSelectionChanged: (s) => vm.chooseMetric(s.single),
+                    selected: vm.metric,
+                    onChanged: vm.chooseMetric,
                   ),
                   const SizedBox(height: 12),
-                  Row(children: [
+                  Wrap(spacing: 8, children: [
                     for (final n in const [7, 30])
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: ChoiceChip(
-                            label: Text('$n days'),
-                            selected: vm.length == n,
-                            onSelected: (_) => vm.chooseLength(n)),
-                      ),
+                      ChoiceChip(
+                          label: Text('$n days'),
+                          selected: vm.length == n,
+                          onSelected: (_) => vm.chooseLength(n)),
                   ]),
                   const SizedBox(height: 12),
                   if (vm.isEmpty)
@@ -92,10 +89,17 @@ class _Stats extends StatelessWidget {
     return Card(
       child: Column(children: [
         for (final (icon, label, value) in rows)
-          ListTile(
-            leading: Icon(icon, color: vm.metric.color(context)),
-            title: Text(label),
-            trailing: Text(value, style: Theme.of(context).textTheme.titleSmall),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(children: [
+              Icon(icon, color: vm.metric.color(context)),
+              const SizedBox(width: 16),
+              Expanded(child: Text(label)),
+              const SizedBox(width: 8),
+              Flexible(
+                child: Text(value, textAlign: TextAlign.end, style: Theme.of(context).textTheme.titleSmall),
+              ),
+            ]),
           ),
       ]),
     );
