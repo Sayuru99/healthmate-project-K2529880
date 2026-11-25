@@ -1,3 +1,7 @@
+import 'package:intl/intl.dart';
+
+final _number = NumberFormat.decimalPattern();
+
 /// Highest value accepted for one entry. Anything above this is almost surely a typing mistake.
 const maxSteps = 100000;
 const maxCalories = 10000;
@@ -10,7 +14,7 @@ String? validateAmount(String? value, {required String label, required int max})
   final n = int.tryParse(text);
   if (n == null) return '$label must be a whole number';
   if (n < 0) return '$label cannot be negative';
-  if (n > max) return '$label must be $max or less';
+  if (n > max) return '$label must be ${_number.format(max)} or less';
   return null;
 }
 
@@ -18,7 +22,7 @@ String? validateAmount(String? value, {required String label, required int max})
 String? validateGoal(String? value, {required String label, required int max}) {
   final n = int.tryParse((value ?? '').trim());
   if (n == null) return 'Enter a whole number';
-  if (n < 1 || n > max) return '$label must be from 1 to $max';
+  if (n < 1 || n > max) return '$label must be from 1 to ${_number.format(max)}';
   return null;
 }
 

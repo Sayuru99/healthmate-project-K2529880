@@ -25,7 +25,7 @@ class MetricCard extends StatelessWidget {
     final ring = ProgressRing(
       value: value / goal,
       color: color,
-      size: wide ? 120 : 88,
+      size: wide ? 108 : 76,
       child: Column(mainAxisSize: MainAxisSize.min, children: [
         Icon(metric.icon, color: color, size: wide ? 32 : 24),
         Text('$percent%', style: text.labelMedium),
@@ -57,10 +57,10 @@ class MetricCard extends StatelessWidget {
       label: '${metric.label}: ${number.format(value)} of ${number.format(goal)} ${metric.unit}, $percent percent. $status',
       child: Card(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(12),
           child: wide
               ? Row(children: [ring, const SizedBox(width: 20), Expanded(child: details)])
-              : Column(children: [ring, const SizedBox(height: 12), details]),
+              : Column(children: [ring, const SizedBox(height: 8), details]),
         ),
       ),
     );

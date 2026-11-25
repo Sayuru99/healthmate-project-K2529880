@@ -77,10 +77,10 @@ class _HomeShellState extends State<HomeShell> {
               ),
             ])
           : body,
-      floatingActionButton: _index < 2
+      // Today has its own button, a floating one would cover the week bars
+      floatingActionButton: _index == 1
           ? FloatingActionButton.extended(
-              onPressed: () => RecordFormScreen.open(context,
-                  date: _index == 0 ? context.read<DashboardViewModel>().day : null),
+              onPressed: () => RecordFormScreen.open(context),
               icon: const Icon(Icons.add),
               label: const Text('Add record'),
             )

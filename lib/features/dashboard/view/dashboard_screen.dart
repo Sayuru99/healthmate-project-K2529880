@@ -7,6 +7,7 @@ import '../../../core/theme/health_metric.dart';
 import '../../../core/utils/dates.dart';
 import '../../../core/widgets/adaptive.dart';
 import '../../../core/widgets/message_view.dart';
+import '../../records/view/record_form_screen.dart';
 import '../../settings/viewmodel/settings_view_model.dart';
 import '../viewmodel/dashboard_view_model.dart';
 import 'metric_card.dart';
@@ -56,7 +57,7 @@ class _Summary extends StatelessWidget {
           wide: wide,
         );
     return ListView(
-      padding: const EdgeInsets.fromLTRB(16, 0, 16, 96),
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
       children: [
         _DayPicker(vm),
         const SizedBox(height: 8),
@@ -71,7 +72,13 @@ class _Summary extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         _QuickWater(vm),
-        const SizedBox(height: 24),
+        const SizedBox(height: 8),
+        FilledButton.icon(
+          onPressed: () => RecordFormScreen.open(context, date: vm.day),
+          icon: const Icon(Icons.add),
+          label: const Text('Add record'),
+        ),
+        const SizedBox(height: 16),
         Row(children: [
           Expanded(child: Text('Steps this week', style: Theme.of(context).textTheme.titleMedium)),
           _Streak(vm.streak(settings.goal(HealthMetric.steps))),
@@ -175,10 +182,10 @@ class _Streak extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    return Chip(
-      avatar: Icon(Icons.bolt, color: days > 0 ? scheme.primary : scheme.outline),
-      label: Text(days == 1 ? '1 day streak' : '$days day streak'),
-      visualDensity: VisualDensity.compact,
-    );
+    return Row(children: [
+      Icon(Icons.bolt, size: 18, color: days > 0 ? scheme.primary : scheme.outline),
+      const SizedBox(width: 4),
+      Text('$days day streak', style: Theme.of(context).textTheme.labelLarge),
+    ]);
   }
 }
