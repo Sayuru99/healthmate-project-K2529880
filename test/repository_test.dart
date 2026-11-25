@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:healthmate/core/app_exception.dart';
 import 'package:healthmate/core/database/app_database.dart';
 import 'package:healthmate/features/records/data/health_record.dart';
 import 'package:healthmate/features/records/data/health_record_repository.dart';
+import 'package:healthmate/features/settings/data/settings_repository.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() {
@@ -84,6 +87,27 @@ void main() {
     expect([total.steps, total.calories, total.water], [7850, 420, 2000]);
     expect((await repo.dayTotals(DateTime(2026, 8, 12), today)).map((t) => t.date.day), [17, 18]);
     expect((await repo.totalFor(DateTime(2026, 8, 10))).isEmpty, isTrue);
+  });
+
+  test('upgrading a version 1 database keeps its records and adds settings', () async {
+    final dir = await Directory.systemTemp.createTemp('healthmate');
+    addTearDown(() => dir.delete(recursive: true));
+    final path = '${dir.path}/v1.db';
+    final v1 = await databaseFactoryFfi.openDatabase(path,
+        options: OpenDatabaseOptions(
+            version: 1,
+            onCreate: (db, _) => db.execute('CREATE TABLE health_records (id INTEGER PRIMARY KEY AUTOINCREMENT, '
+                'date TEXT NOT NULL, steps INTEGER NOT NULL, calories INTEGER NOT NULL, water INTEGER NOT NULL)')));
+    await v1.insert('health_records', {'date': '2026-08-18', 'steps': 500, 'calories': 20, 'water': 250});
+    await v1.close();
+
+    final upgraded = AppDatabase(factory: databaseFactoryFfi, path: path);
+    expect((await HealthRecordRepository(upgraded).find()).single.steps, 500);
+    final settings = SettingsRepository(upgraded);
+    await settings.save('goal_steps', '9000');
+    await settings.save('goal_steps', '9500');
+    expect(await settings.load(), {'goal_steps': '9500'});
+    await upgraded.close();
   });
 
   test('a new database starts with sample records, and they can be reloaded', () async {

@@ -9,8 +9,9 @@ class AppDatabase {
   AppDatabase({this._factory, this._path, this.seedOnCreate = true, this._clock = DateTime.now});
 
   static const fileName = 'healthmate.db';
-  static const version = 1;
+  static const version = 2;
   static const recordsTable = 'health_records';
+  static const settingsTable = 'settings';
 
   final DatabaseFactory? _factory;
   final String? _path;
@@ -32,14 +33,23 @@ class AppDatabase {
     final path = _path ?? p.join(await factory.getDatabasesPath(), fileName);
     return factory.openDatabase(
       path,
-      options: OpenDatabaseOptions(version: version, onCreate: _create),
+      options: OpenDatabaseOptions(version: version, onCreate: _create, onUpgrade: _upgrade),
     );
   }
 
   Future<void> _create(Database db, int version) async {
     await _createRecords(db);
+    await _createSettings(db);
     if (seedOnCreate) await insertSampleRecords(db, _clock());
   }
+
+  /// Version 2 added goals and the theme. Records from version 1 are kept.
+  Future<void> _upgrade(Database db, int from, int to) async {
+    if (from < 2) await _createSettings(db);
+  }
+
+  static Future<void> _createSettings(DatabaseExecutor db) =>
+      db.execute('CREATE TABLE $settingsTable (key TEXT PRIMARY KEY, value TEXT NOT NULL)');
 
   static Future<void> _createRecords(DatabaseExecutor db) async {
     await db.execute('''
