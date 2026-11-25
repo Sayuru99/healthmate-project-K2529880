@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" font-family="Liberation Sans, Arial" font-size="19">
+<rect width="1200" height="900" fill="#fff"/>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker>
+<marker id="b" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C62828"/></marker></defs>
+<rect x="40" y="30" width="860" height="180" rx="12" fill="#E0F2F1" stroke="#00796B" stroke-width="2"/>
+<text x="60" y="62" font-weight="bold" font-size="22">View  (features/*/view)</text>
+<text x="60" y="94">Screens and widgets. They draw state and pass on taps. No SQL.</text>
+<g fill="#fff" stroke="#00796B"><rect x="60" y="115" width="195" height="76" rx="8"/><rect x="268" y="115" width="195" height="76" rx="8"/><rect x="476" y="115" width="195" height="76" rx="8"/><rect x="684" y="115" width="195" height="76" rx="8"/></g>
+<g font-size="17" text-anchor="middle"><text x="157" y="147">DashboardScreen</text><text x="157" y="173" fill="#555">MetricCard, WeekStrip</text><text x="365" y="147">RecordsScreen</text><text x="365" y="173" fill="#555">RecordFormScreen</text><text x="573" y="147">TrendsScreen</text><text x="573" y="173" fill="#555">BarChart</text><text x="781" y="158">SettingsScreen</text></g>
+<rect x="40" y="290" width="860" height="180" rx="12" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+<text x="60" y="322" font-weight="bold" font-size="22">ViewModel  (features/*/viewmodel)</text>
+<text x="60" y="354">ChangeNotifier classes. They hold screen state, loading and errors.</text>
+<g fill="#fff" stroke="#1565C0"><rect x="60" y="375" width="195" height="76" rx="8"/><rect x="268" y="375" width="195" height="76" rx="8"/><rect x="476" y="375" width="195" height="76" rx="8"/><rect x="684" y="375" width="195" height="76" rx="8"/></g>
+<g font-size="17" text-anchor="middle"><text x="157" y="418">DashboardViewModel</text><text x="365" y="418">RecordsViewModel</text><text x="573" y="418">TrendsViewModel</text><text x="781" y="418">SettingsViewModel</text></g>
+<rect x="40" y="550" width="860" height="150" rx="12" fill="#FFF8E1" stroke="#F57F17" stroke-width="2"/>
+<text x="60" y="582" font-weight="bold" font-size="22">Model  (features/*/data)</text>
+<g fill="#fff" stroke="#F57F17"><rect x="60" y="600" width="400" height="82" rx="8"/><rect x="476" y="600" width="195" height="82" rx="8"/><rect x="684" y="600" width="195" height="82" rx="8"/></g>
+<g font-size="17" text-anchor="middle"><text x="260" y="634">HealthRecordRepository</text><text x="260" y="662" fill="#555">CRUD, date filter, day totals</text><text x="573" y="634">HealthRecord</text><text x="573" y="662" fill="#555">DayTotal, RecordFilter</text><text x="781" y="646">SettingsRepository</text></g>
+<rect x="40" y="770" width="860" height="100" rx="12" fill="#ECEFF1" stroke="#455A64" stroke-width="2"/>
+<text x="60" y="804" font-weight="bold" font-size="22">Database  (core/database)</text>
+<text x="60" y="838">AppDatabase opens SQLite through sqflite: tables, migration, sample data</text>
+<g stroke="#333" stroke-width="2.5"><line x1="200" y1="210" x2="200" y2="284" marker-end="url(#a)"/><line x1="200" y1="470" x2="200" y2="544" marker-end="url(#a)"/><line x1="200" y1="700" x2="200" y2="764" marker-end="url(#a)"/></g>
+<g stroke="#C62828" stroke-width="2.5" stroke-dasharray="7 5"><line x1="560" y1="290" x2="560" y2="216" marker-end="url(#b)"/><line x1="560" y1="550" x2="560" y2="476" marker-end="url(#b)"/><line x1="560" y1="770" x2="560" y2="706" marker-end="url(#b)"/></g>
+<g font-size="17"><text x="215" y="253">calls methods (context.read)</text><text x="575" y="253" fill="#C62828">notifyListeners (context.watch)</text><text x="215" y="513">save, delete, find, dayTotals</text><text x="575" y="513" fill="#C62828">notifyListeners after each write</text><text x="215" y="740">SQL with bound arguments</text><text x="575" y="740" fill="#C62828">rows, or an AppException</text></g>
+<rect x="940" y="30" width="230" height="440" rx="12" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="2"/>
+<text x="960" y="62" font-weight="bold" font-size="21">Shared  (core)</text>
+<g font-size="17"><text x="960" y="104">theme/</text><text x="975" y="128" fill="#555">appTheme</text><text x="975" y="152" fill="#555">HealthMetric</text><text x="960" y="192">utils/</text><text x="975" y="216" fill="#555">validators, dates</text><text x="960" y="256">widgets/</text><text x="975" y="280" fill="#555">ProgressRing</text><text x="975" y="304" fill="#555">WideSegments</text><text x="975" y="328" fill="#555">MessageView</text><text x="975" y="352" fill="#555">adaptive dialogs</text><text x="960" y="392">AppException</text></g>
+<rect x="940" y="550" width="230" height="320" rx="12" fill="#FAFAFA" stroke="#757575" stroke-width="2"/>
+<text x="960" y="582" font-weight="bold" font-size="21">Platforms</text>
+<g font-size="17"><text x="960" y="624">Android</text><text x="975" y="648" fill="#555">sqflite plugin</text><text x="960" y="688">iOS</text><text x="975" y="712" fill="#555">sqflite plugin</text><text x="960" y="752">Mobile web</text><text x="975" y="776" fill="#555">SQLite in WebAssembly</text><text x="960" y="816">Unit tests</text><text x="975" y="840" fill="#555">sqflite_common_ffi</text></g>
+</svg>
