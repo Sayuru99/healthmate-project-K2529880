@@ -100,27 +100,22 @@ class _RecordsScreenState extends State<RecordsScreen> {
             ),
           ),
         ),
-        SizedBox(
-          height: 56,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            children: [
+        // a Wrap and not a scrolling row, so the date range is never hidden off screen
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: SizedBox(
+            width: double.infinity,
+            child: Wrap(spacing: 8, children: [
               for (final p in DatePreset.values)
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: ChoiceChip(
-                      label: Text(p.label), selected: vm.preset == p, onSelected: (_) => vm.choosePreset(p)),
-                ),
+                ChoiceChip(label: Text(p.label), selected: vm.preset == p, onSelected: (_) => vm.choosePreset(p)),
               ChoiceChip(
-                avatar: vm.preset == null ? null : const Icon(Icons.date_range, size: 18),
                 label: Text(vm.preset == null
                     ? '${shortDate(vm.filter.from!)} to ${shortDate(vm.filter.to!)}'
                     : 'Choose dates'),
                 selected: vm.preset == null,
                 onSelected: (_) => _pickRange(vm),
               ),
-            ],
+            ]),
           ),
         ),
         Expanded(child: _body(vm)),

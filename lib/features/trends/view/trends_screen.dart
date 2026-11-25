@@ -96,7 +96,8 @@ class _Stats extends StatelessWidget {
               const SizedBox(width: 16),
               Expanded(child: Text(label)),
               const SizedBox(width: 8),
-              Flexible(
+              Expanded(
+                flex: 2,
                 child: Text(value, textAlign: TextAlign.end, style: Theme.of(context).textTheme.titleSmall),
               ),
             ]),
