@@ -4,12 +4,13 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.4.0 <4.0.0'
+  sdk: '^3.14.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.8
+  # Material and Cupertino widgets: since Flutter 3.47 they are packages, not part of the SDK
+  material_ui: ^1.1.0
   provider: ^6.1.5
   sqflite: ^2.4.2
   # runs the same sqflite code in a browser (SQLite compiled to WebAssembly)

@@ -6,10 +6,7 @@ import 'sample_data.dart';
 
 /// Opens the SQLite file and owns the schema. Nothing else in the app writes DDL.
 class AppDatabase {
-  AppDatabase({DatabaseFactory? factory, String? path, this.seedOnCreate = true, DateTime Function()? clock})
-      : _factory = factory,
-        _path = path,
-        _clock = clock ?? DateTime.now;
+  AppDatabase({this._factory, this._path, this.seedOnCreate = true, this._clock = DateTime.now});
 
   static const fileName = 'healthmate.db';
   static const version = 1;
