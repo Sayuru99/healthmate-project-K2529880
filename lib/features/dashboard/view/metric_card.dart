@@ -4,7 +4,6 @@ import 'package:material_ui/material_ui.dart';
 import '../../../core/theme/health_metric.dart';
 import '../../../core/widgets/progress_ring.dart';
 
-/// One metric for the day: icon in a progress ring, amount, and distance from the goal.
 class MetricCard extends StatelessWidget {
   const MetricCard({super.key, required this.metric, required this.value, required this.goal, this.wide = false});
 

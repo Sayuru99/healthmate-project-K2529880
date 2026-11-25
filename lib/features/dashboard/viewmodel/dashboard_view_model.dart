@@ -5,7 +5,6 @@ import '../../../core/utils/dates.dart';
 import '../../records/data/health_record.dart';
 import '../../records/data/health_record_repository.dart';
 
-/// The summary of one day, its week, and the current step streak.
 class DashboardViewModel extends ChangeNotifier {
   DashboardViewModel(this._repo, {this._clock = DateTime.now}) : _day = dateOnly(_clock()) {
     _today = _day;
@@ -22,7 +21,6 @@ class DashboardViewModel extends ChangeNotifier {
   DateTime get today => _today;
   bool get isToday => _day == _today;
 
-  /// The seven days that end on [day], oldest first. Days without records are zero.
   List<DayTotal> _week = const [];
   List<DayTotal> get week => _week;
   DayTotal get total => _week.isEmpty ? DayTotal(_day) : _week.last;
@@ -56,7 +54,7 @@ class DashboardViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Call when the app comes back to the front, because midnight may have passed.
+  // Call when the app comes back to the front, because midnight may have passed.
   Future<void> refreshDate() async {
     final now = dateOnly(_clock());
     if (now == _today) return;
@@ -76,8 +74,8 @@ class DashboardViewModel extends ChangeNotifier {
   Future<HealthRecord> addWater(int ml) => _repo.add(HealthRecord(date: _day, water: ml));
   Future<void> undoAdd(HealthRecord record) => _repo.delete(record.id!);
 
-  /// Days in a row with the step goal met. Today only counts once it is met, so the streak
-  /// does not drop to zero every morning.
+  // Days in a row with the step goal met. Today only counts once it is met, so the streak
+  // does not drop to zero every morning.
   int streak(int stepGoal) {
     final met = {for (final t in _history) if (t.steps >= stepGoal) t.date};
     var day = met.contains(_today) ? _today : addDays(_today, -1);

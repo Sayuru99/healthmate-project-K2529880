@@ -100,7 +100,6 @@ class _RecordsScreenState extends State<RecordsScreen> {
             ),
           ),
         ),
-        // a Wrap and not a scrolling row, so the date range is never hidden off screen
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: SizedBox(

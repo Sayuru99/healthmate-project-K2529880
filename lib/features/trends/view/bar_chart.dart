@@ -5,7 +5,6 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../../core/utils/dates.dart';
 
-/// Bars for each day with a dashed goal line. Tap a bar to read its value.
 class BarChart extends StatefulWidget {
   const BarChart({super.key, required this.values, required this.goal, required this.color, required this.unit});
 
@@ -25,7 +24,6 @@ class _BarChartState extends State<BarChart> {
   @override
   void didUpdateWidget(BarChart old) {
     super.didUpdateWidget(old);
-    // the same position is a different day once the range changes
     if (old.values.length != widget.values.length) _selected = null;
   }
 
@@ -102,7 +100,6 @@ class _BarPainter extends CustomPainter {
             topLeft: const Radius.circular(4), topRight: const Radius.circular(4)),
         paint,
       );
-      // 30 labels do not fit, so name every seventh day counting back from the last
       if (values.length <= 7 || (values.length - 1 - i) % 7 == 0) {
         final label = values.length <= 7 ? DateFormat('E').format(date) : shortDate(date);
         final text = TextPainter(

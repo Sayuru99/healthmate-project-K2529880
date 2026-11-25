@@ -8,7 +8,6 @@ bool _isApple(BuildContext context) {
   return platform == TargetPlatform.iOS || platform == TargetPlatform.macOS;
 }
 
-/// Material calendar on Android, wheel picker on iOS.
 Future<DateTime?> pickDate(BuildContext context, {required DateTime initial, required DateTime last}) {
   final first = DateTime(2000);
   if (!_isApple(context)) {
@@ -41,7 +40,6 @@ Future<DateTime?> pickDate(BuildContext context, {required DateTime initial, req
   );
 }
 
-/// A yes/no question in the style of the platform. False when dismissed.
 Future<bool> confirm(
   BuildContext context, {
   required String title,
@@ -76,7 +74,6 @@ void showMessageOn(ScaffoldMessengerState messenger, String text, {SnackBarActio
   ..hideCurrentSnackBar()
   ..showSnackBar(SnackBar(content: Text(text), action: action, persist: false));
 
-/// Runs a write and shows what went wrong if it fails. True when it worked.
 Future<bool> tryAction(ScaffoldMessengerState messenger, Future<void> Function() action) async {
   try {
     await action();

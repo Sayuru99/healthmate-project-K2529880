@@ -2,12 +2,10 @@ import 'package:intl/intl.dart';
 
 final _number = NumberFormat.decimalPattern();
 
-/// Highest value accepted for one entry. Anything above this is almost surely a typing mistake.
 const maxSteps = 100000;
 const maxCalories = 10000;
 const maxWaterMl = 10000;
 
-/// Whole number from 0 to [max]. Blank counts as 0, because a user may only want to log water.
 String? validateAmount(String? value, {required String label, required int max}) {
   final text = (value ?? '').trim();
   if (text.isEmpty) return null;
@@ -18,7 +16,6 @@ String? validateAmount(String? value, {required String label, required int max})
   return null;
 }
 
-/// A goal has to be at least 1, or the progress ring would divide by zero.
 String? validateGoal(String? value, {required String label, required int max}) {
   final n = int.tryParse((value ?? '').trim());
   if (n == null) return 'Enter a whole number';
@@ -28,5 +25,4 @@ String? validateGoal(String? value, {required String label, required int max}) {
 
 int parseAmount(String value) => int.tryParse(value.trim()) ?? 0;
 
-/// An entry with nothing in it is not worth saving.
 bool hasAnyAmount(int steps, int calories, int water) => steps > 0 || calories > 0 || water > 0;

@@ -3,7 +3,6 @@ import 'package:sqflite/sqflite.dart';
 import '../../../core/app_exception.dart';
 import '../../../core/database/app_database.dart';
 
-/// Key and value rows in the settings table.
 class SettingsRepository {
   SettingsRepository(this._appDb);
 

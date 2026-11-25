@@ -10,7 +10,6 @@ import 'features/settings/view/settings_screen.dart';
 import 'features/trends/view/trends_screen.dart';
 import 'features/trends/viewmodel/trends_view_model.dart';
 
-/// The four tabs. A bottom bar on phones and a side rail on wider screens.
 class HomeShell extends StatefulWidget {
   const HomeShell({super.key});
 
@@ -37,7 +36,6 @@ class _HomeShellState extends State<HomeShell> {
     _lifecycle = AppLifecycleListener(onResume: _onResume);
   }
 
-  // "today" may have changed while the app was in the background
   void _onResume() {
     context.read<DashboardViewModel>().refreshDate();
     context.read<TrendsViewModel>().load();
@@ -54,7 +52,6 @@ class _HomeShellState extends State<HomeShell> {
   @override
   Widget build(BuildContext context) {
     final wide = MediaQuery.sizeOf(context).width >= 600;
-    // IndexedStack keeps the scroll position and filters of each tab
     final body = IndexedStack(index: _index, children: _screens);
     return Scaffold(
       body: wide
@@ -77,7 +74,6 @@ class _HomeShellState extends State<HomeShell> {
               ),
             ])
           : body,
-      // Today has its own button, a floating one would cover the week bars
       floatingActionButton: _index == 1
           ? FloatingActionButton.extended(
               onPressed: () => RecordFormScreen.open(context),

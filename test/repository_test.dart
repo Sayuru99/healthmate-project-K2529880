@@ -68,7 +68,7 @@ void main() {
     }
     Future<List<int>> days(RecordFilter f) async => [for (final r in await repo.find(f)) r.date.day];
 
-    expect(await days(const RecordFilter()), [18, 17, 1, 31]); // newest first
+    expect(await days(const RecordFilter()), [18, 17, 1, 31]);
     expect(await days(RecordFilter(from: DateTime(2026, 8, 1), to: DateTime(2026, 8, 17))), [17, 1]);
     expect(await days(const RecordFilter(query: '2026-08-18')), [18]);
     expect(await days(const RecordFilter(query: 'aug 2026')), [18, 17, 1]);

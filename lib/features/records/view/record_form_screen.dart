@@ -9,7 +9,6 @@ import '../../../core/widgets/adaptive.dart';
 import '../data/health_record.dart';
 import '../viewmodel/records_view_model.dart';
 
-/// Adds a record, or edits [record] when one is given.
 class RecordFormScreen extends StatefulWidget {
   const RecordFormScreen({super.key, this.record, this.date});
 

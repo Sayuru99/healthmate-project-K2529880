@@ -6,7 +6,6 @@ import '../../../core/utils/dates.dart';
 import '../../records/data/health_record.dart';
 import '../../records/data/health_record_repository.dart';
 
-/// One metric over the last 7 or 30 days.
 class TrendsViewModel extends ChangeNotifier {
   TrendsViewModel(this._repo, {this._clock = DateTime.now}) {
     _repo.addListener(load);
@@ -65,7 +64,6 @@ class TrendsViewModel extends ChangeNotifier {
 
   bool get isEmpty => _days.every((d) => valueOf(d) == 0);
 
-  /// Average over days that have something logged, so a missed day does not count as zero.
   int get average {
     final values = _days.map(valueOf).where((v) => v > 0).toList();
     return values.isEmpty ? 0 : (values.reduce((a, b) => a + b) / values.length).round();

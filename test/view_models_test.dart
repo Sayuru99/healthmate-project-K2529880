@@ -89,7 +89,7 @@ void main() {
     await vm.refreshDate();
     expect(vm.day, DateTime(2026, 8, 19));
     expect(vm.total.isEmpty, isTrue);
-    await vm.goTo(DateTime(2030)); // the future is not allowed
+    await vm.goTo(DateTime(2030));
     expect(vm.isToday, isTrue);
     vm.dispose();
   });
@@ -100,7 +100,7 @@ void main() {
     await log(3, steps: 100);
     final vm = DashboardViewModel(repo, clock: () => now);
     await vm.load();
-    expect(vm.streak(8000), 2); // today is not done yet but has not broken it
+    expect(vm.streak(8000), 2);
     await log(0, steps: 8000);
     await vm.load();
     expect(vm.streak(8000), 3);

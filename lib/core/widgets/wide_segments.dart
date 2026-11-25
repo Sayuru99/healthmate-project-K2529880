@@ -1,6 +1,5 @@
 import 'package:material_ui/material_ui.dart';
 
-/// Fills the width, and scrolls sideways when large text makes the segments too wide for the phone.
 class WideSegments<T> extends StatelessWidget {
   const WideSegments({super.key, required this.segments, required this.selected, required this.onChanged});
 

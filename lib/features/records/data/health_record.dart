@@ -1,12 +1,11 @@
 import '../../../core/utils/dates.dart';
 
-/// One row of the health_records table.
 class HealthRecord {
-  final int? id; // null until SQLite gives it one
-  final DateTime date; // no time part
+  final int? id;
+  final DateTime date;
   final int steps;
   final int calories;
-  final int water; // ml
+  final int water;
 
   HealthRecord({this.id, required DateTime date, this.steps = 0, this.calories = 0, this.water = 0})
       : date = dateOnly(date);
@@ -40,7 +39,6 @@ class HealthRecord {
   int get hashCode => Object.hash(id, date, steps, calories, water);
 }
 
-/// Everything logged on one day added together.
 class DayTotal {
   final DateTime date;
   final int steps;
@@ -59,7 +57,6 @@ class DayTotal {
   bool get isEmpty => steps == 0 && calories == 0 && water == 0;
 }
 
-/// Adds a zero total for every day in the range that has no records.
 List<DayTotal> fillDays(List<DayTotal> totals, DateTime from, DateTime to) {
   final byDate = {for (final t in totals) t.date: t};
   return [
@@ -67,7 +64,6 @@ List<DayTotal> fillDays(List<DayTotal> totals, DateTime from, DateTime to) {
   ];
 }
 
-/// Which records to show in the list. Every part is optional.
 class RecordFilter {
   final DateTime? from;
   final DateTime? to;

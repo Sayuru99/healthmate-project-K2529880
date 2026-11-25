@@ -1,4 +1,3 @@
-/// An error with a message that is safe to show to the user.
 class AppException implements Exception {
   final String message;
   final Object? cause;

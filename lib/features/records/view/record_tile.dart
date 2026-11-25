@@ -4,14 +4,12 @@ import 'package:material_ui/material_ui.dart';
 import '../../../core/theme/health_metric.dart';
 import '../data/health_record.dart';
 
-/// One entry. Tap to edit, swipe or use the bin to delete.
 class RecordTile extends StatelessWidget {
   const RecordTile({super.key, required this.record, required this.onTap, required this.onDelete});
 
   final HealthRecord record;
   final VoidCallback onTap;
 
-  /// Returns true if the row should slide away on its own.
   final Future<bool> Function() onDelete;
 
   @override
@@ -67,7 +65,6 @@ class _Amount extends StatelessWidget {
           TextSpan(
               text: NumberFormat.decimalPattern().format(value),
               style: const TextStyle(fontWeight: FontWeight.w600)),
-          // the walking icon already says steps
           if (metric != HealthMetric.steps)
             TextSpan(text: ' ${metric.unit}', style: Theme.of(context).textTheme.bodySmall),
         ])),

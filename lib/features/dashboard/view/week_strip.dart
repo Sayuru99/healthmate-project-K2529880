@@ -5,7 +5,6 @@ import '../../../core/theme/health_metric.dart';
 import '../../../core/utils/dates.dart';
 import '../../records/data/health_record.dart';
 
-/// Seven small step bars. Tapping one opens that day.
 class WeekStrip extends StatelessWidget {
   const WeekStrip(
       {super.key, required this.days, required this.goal, required this.selected, required this.onTap});
@@ -46,7 +45,6 @@ class WeekStrip extends StatelessWidget {
                             width: 16,
                             height: d.steps == 0 ? 4 : 4 + (_height - 4) * d.steps / highest,
                             decoration: BoxDecoration(
-                              // a full colour means the goal was met
                               color: color.withValues(alpha: d.steps >= goal ? 1 : 0.4),
                               borderRadius: BorderRadius.circular(8),
                             ),

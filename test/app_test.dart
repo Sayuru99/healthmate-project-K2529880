@@ -5,7 +5,6 @@ import 'package:healthmate/features/records/data/health_record_repository.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-/// Drives the whole app, screens down to SQLite.
 void main() {
   final today = DateTime(2026, 8, 18);
   late AppDatabase db;

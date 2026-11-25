@@ -3,7 +3,6 @@ import 'package:sqflite/sqflite.dart';
 import '../utils/dates.dart';
 import 'app_database.dart';
 
-/// [steps, calories, water] for the days before today, newest first. Made up for testing.
 const _pastDays = [
   [9120, 510, 2250], [6430, 340, 1750], [10480, 590, 2500], [8210, 455, 2000], [5120, 270, 1500],
   [11930, 660, 2750], [7640, 415, 2100], [8890, 480, 2000], [4310, 225, 1250], [9560, 530, 2400],
@@ -13,8 +12,6 @@ const _pastDays = [
   [7780, 420, 1950], [8330, 460, 2100], [4950, 260, 1350], [10210, 575, 2500],
 ];
 
-/// A month of dummy records. Today has two entries that add up to 7,850 steps, 420 kcal and
-/// 2,000 ml, the example day in the coursework brief.
 Future<void> insertSampleRecords(DatabaseExecutor db, DateTime now) async {
   final today = dateOnly(now);
   final batch = db.batch();

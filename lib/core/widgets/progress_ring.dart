@@ -2,7 +2,6 @@ import 'dart:math' as math;
 
 import 'package:material_ui/material_ui.dart';
 
-/// A ring that fills as [value] goes from 0 to 1, with something in the middle.
 class ProgressRing extends StatelessWidget {
   const ProgressRing({super.key, required this.value, required this.color, required this.child, this.size = 112});
 
@@ -44,7 +43,6 @@ class _RingPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
     canvas.drawArc(rect, 0, math.pi * 2, false, paint..color = track);
     if (value <= 0) return;
-    // the round ends stick out half a stroke each, enough to make 98% look like a full ring
     final caps = value < 1 ? stroke / (rect.width / 2) : 0;
     final sweep = math.max(math.pi * 2 * value - caps, 0.01);
     canvas.drawArc(rect, -math.pi / 2 + caps / 2, sweep, false, paint..color = color);

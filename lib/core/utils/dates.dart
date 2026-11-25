@@ -2,7 +2,6 @@ import 'package:intl/intl.dart';
 
 final _dbFormat = DateFormat('yyyy-MM-dd');
 
-/// The text stored in the date column. ISO order means text sorts by date.
 String toDbDate(DateTime d) => _dbFormat.format(d);
 DateTime fromDbDate(String s) => _dbFormat.parseStrict(s);
 
@@ -23,9 +22,6 @@ String relativeDate(DateTime d, DateTime today) {
 
 const _months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
-/// Turns what the user typed into a LIKE pattern for the date column.
-/// Understands parts of an ISO date ("2026-11", "11-18") and words ("18 aug", "aug 2026").
-/// Returns null when the text cannot be a date, so the search has no results.
 String? dateSearchPattern(String input) {
   final text = input.trim().toLowerCase();
   // only digits and dashes reach SQL, so % and _ cannot act as wildcards

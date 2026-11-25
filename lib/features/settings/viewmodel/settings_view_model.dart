@@ -5,7 +5,6 @@ import '../../../core/app_exception.dart';
 import '../../../core/theme/health_metric.dart';
 import '../data/settings_repository.dart';
 
-/// Daily goals and the theme. Uses the defaults until the saved values have loaded.
 class SettingsViewModel extends ChangeNotifier {
   SettingsViewModel(this._repo) {
     _load();
@@ -29,7 +28,7 @@ class SettingsViewModel extends ChangeNotifier {
       _themeMode = ThemeMode.values.asNameMap()[saved['theme']] ?? ThemeMode.system;
       notifyListeners();
     } on AppException {
-      // the defaults still work, and the records screens report a broken database
+      // keep the defaults
     }
   }
 

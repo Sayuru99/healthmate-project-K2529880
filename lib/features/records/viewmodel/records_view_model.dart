@@ -15,14 +15,12 @@ enum DatePreset {
   final String label;
 }
 
-/// The entries of one day and what they add up to.
 class RecordDay {
   final DayTotal total;
   final List<HealthRecord> entries;
   const RecordDay(this.total, this.entries);
 }
 
-/// State of the records list: filters, the days to show, loading and errors.
 class RecordsViewModel extends ChangeNotifier {
   RecordsViewModel(this._repo, {this._clock = DateTime.now}) {
     _repo.addListener(load);
@@ -43,7 +41,6 @@ class RecordsViewModel extends ChangeNotifier {
 
   DatePreset? _preset = DatePreset.all;
 
-  /// Null when the user picked a date range of their own.
   DatePreset? get preset => _preset;
 
   RecordFilter _filter = const RecordFilter();
@@ -113,13 +110,11 @@ class RecordsViewModel extends ChangeNotifier {
 
   Future<void> delete(HealthRecord record) => _repo.delete(record.id!);
 
-  /// Puts a deleted record back with its old id.
   Future<void> restore(HealthRecord record) async => _repo.add(record);
 
   Future<void> deleteAll() => _repo.deleteAll();
   Future<void> loadSamples() => _repo.replaceWithSamples(today);
 
-  /// Everything the current filter shows, as CSV text.
   String toCsv() => [
         'date,steps,calories,water_ml',
         for (final day in _days)

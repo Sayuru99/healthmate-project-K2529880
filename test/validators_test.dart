@@ -7,7 +7,7 @@ void main() {
     String? steps(String? v) => validateAmount(v, label: 'Steps', max: maxSteps);
     expect(steps('7850'), isNull);
     expect(steps(' 0 '), isNull);
-    expect(steps(''), isNull); // blank means nothing to log
+    expect(steps(''), isNull);
     expect(steps('$maxSteps'), isNull);
     expect(steps('${maxSteps + 1}'), 'Steps must be 100,000 or less');
     expect(steps('-5'), 'Steps cannot be negative');

@@ -2,8 +2,6 @@ import 'package:material_ui/material_ui.dart';
 
 import '../utils/validators.dart';
 
-/// The three things HealthMate tracks. Name, unit, icon, colour and limits live in one place,
-/// so a metric looks the same on every screen.
 enum HealthMetric {
   steps('Steps', 'steps', Icons.directions_walk, Color(0xFF2E7D32), Color(0xFF81C784), maxSteps, 8000),
   calories('Calories', 'kcal', Icons.local_fire_department, Color(0xFFC62828), Color(0xFFEF9A9A), maxCalories, 500),

@@ -11,7 +11,6 @@ import 'features/settings/viewmodel/settings_view_model.dart';
 import 'features/trends/viewmodel/trends_view_model.dart';
 import 'home_shell.dart';
 
-/// Wires the layers together: database, then repositories, then view models, then screens.
 class HealthMateApp extends StatelessWidget {
   const HealthMateApp({super.key, required this.database, this.clock = DateTime.now});
 
@@ -35,7 +34,6 @@ class HealthMateApp extends StatelessWidget {
         theme: appTheme(Brightness.light),
         darkTheme: appTheme(Brightness.dark),
         themeMode: context.select((SettingsViewModel s) => s.themeMode),
-        // British English, so calendars start on Monday and dates read day first
         supportedLocales: const [Locale('en', 'GB')],
         localizationsDelegates: GlobalMaterialLocalizations.delegates,
         home: const HomeShell(),

@@ -1,6 +1,5 @@
 import 'package:material_ui/material_ui.dart';
 
-/// Centred icon and text for empty and error states, with an optional button.
 class MessageView extends StatelessWidget {
   const MessageView({super.key, required this.icon, required this.title, this.body, this.actionLabel, this.onAction});
 
