@@ -59,6 +59,14 @@ class DayTotal {
   bool get isEmpty => steps == 0 && calories == 0 && water == 0;
 }
 
+/// Adds a zero total for every day in the range that has no records.
+List<DayTotal> fillDays(List<DayTotal> totals, DateTime from, DateTime to) {
+  final byDate = {for (final t in totals) t.date: t};
+  return [
+    for (var d = dateOnly(from); !d.isAfter(to); d = addDays(d, 1)) byDate[d] ?? DayTotal(d),
+  ];
+}
+
 /// Which records to show in the list. Every part is optional.
 class RecordFilter {
   final DateTime? from;
