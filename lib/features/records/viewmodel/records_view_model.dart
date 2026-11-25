@@ -116,6 +116,9 @@ class RecordsViewModel extends ChangeNotifier {
   /// Puts a deleted record back with its old id.
   Future<void> restore(HealthRecord record) async => _repo.add(record);
 
+  Future<void> deleteAll() => _repo.deleteAll();
+  Future<void> loadSamples() => _repo.replaceWithSamples(today);
+
   /// Everything the current filter shows, as CSV text.
   String toCsv() => [
         'date,steps,calories,water_ml',
